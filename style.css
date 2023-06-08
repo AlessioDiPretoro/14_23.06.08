@@ -36,11 +36,6 @@ form {
   background-color: #df9322;
 }
 
-.extract {
-  background-color: #000000;
-  color: white;
-}
-
 .nPlayer {
   display: inline-block;
   width: 40px;
@@ -52,6 +47,11 @@ form {
   border: 1px solid #fa0000;
   border-radius: 50%;
   background-color: #df9322;
+}
+
+.extract {
+  background-color: #000000;
+  color: white;
 }
 
 .tPlayer {
