@@ -22,25 +22,40 @@ buildTable(maxTableN);
 const buildPlayerTable = function (e) {
   let nTablesToMake = parseInt(nTables.value);
   e.preventDefault();
-  console.log("nTablesToMake", nTablesToMake);
   for (let c = 0; c < nTablesToMake; c++) {
     let newT = document.createElement("div");
     tablePlayer.appendChild(newT);
     newT.classList.add("tPlayer");
 
     for (let i = 0; i < maxPlayerN; i++) {
-      let num = document.createElement("div");
+      // let num = document.createElement("div");
 
       let rnd = Math.floor(Math.random() * maxTableN + 1);
-      num.innerText = rnd;
-      playerTableNumbers.push(rnd);
-      console.log("c: ", c);
+
+      if (!playerTableNumbers.includes(rnd)) {
+        playerTableNumbers.push(rnd);
+        // num.innerText = rnd;
+        // num.classList.add("nPlayer");
+        // newT.appendChild(num);
+      } else {
+        i--;
+      }
+    }
+    playerTableNumbers.sort(function (a, b) {
+      return a - b;
+    });
+    console.log("playerTableNumbers", playerTableNumbers);
+
+    for (let i = 0; i < maxPlayerN; i++) {
+      let num = document.createElement("div");
+      num.innerText = playerTableNumbers[i];
       num.classList.add("nPlayer");
       newT.appendChild(num);
+      console.log("i", i);
     }
+
     playerAllNumbers.push(playerTableNumbers);
     playerTableNumbers = [];
-    console.log("playerAllNumbers", playerAllNumbers);
   }
   nTables.value.innerText = "";
 };
@@ -60,18 +75,11 @@ const newNumber = function (e) {
 
   let playerNumbers = document.querySelectorAll(".nPlayer");
   playerNumbers.forEach((nT) => {
-    if (n === nT) {
-      console.log("trovato");
+    if (n === parseInt(nT.innerText)) {
+      console.log("trovato", nT);
+      nT.classList.add("extract");
     }
   });
-
-  // playerAllNumbers.forEach((e) => {
-  //   e.forEach((e2) => {
-  //     if (n === e2) {
-  //       console.log("trovato");
-  //     }
-  //   });
-  // });
 };
 
 const newNumberButton = document.getElementById("newNumberButton");
